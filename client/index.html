@@ -1,1 +1,142 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEADLINE</title>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/hud.css">
+</head>
+<body>
+
+<!-- ============ LOBBY ============ -->
+<div class="screen lobby show" id="screen-lobby">
+  <div class="logo">
+    <div class="logo-mark">☠</div>
+    <h1>DEADLINE</h1>
+    <p class="logo-sub">SURVIVE · RELOAD · REPEAT</p>
+  </div>
+
+  <div class="panel">
+    <label class="field">
+      <span>CALLSIGN</span>
+      <input type="text" id="username" maxlength="12" placeholder="ROOKIE" value="ROOKIE">
+    </label>
+
+    <div class="field">
+      <span>SKIN</span>
+      <div class="skins" id="skins"></div>
+    </div>
+
+    <div class="panel-actions">
+      <button class="btn btn-primary" id="btn-solo">SOLO RAID</button>
+      <button class="btn" id="btn-create">CREATE ROOM</em></button>
+      <button class="btn" id="btn-join">JOIN ROOM</em></button>
+      <input type="text" id="join-code" maxlength="4" placeholder="ROOM CODE"
+       style="background:rgba(0,0,0,0.5);border:1px solid rgba(255,80,40,0.3);
+              color:#f0d080;padding:10px;font-size:14px;letter-spacing:0.4em;
+              text-transform:uppercase;text-align:center;font-family:inherit;
+              width:120px;margin-top:8px;border-radius:4px;outline:none;" />
+    </div>
+
+    <div class="panel-note">
+      <span>WASD MOVE</span><span>MOUSE AIM</span><span>CLICK FIRE</span>
+      <span>R RELOAD</span><span>F SWITCH</span><span>E PICKUP</span>
+    </div>
+  </div>
+
+  <div class="lobby-footer">A fan-made prototype · v0.1</div>
+</div>
+<div class="screen room" id="screen-room">
+  <div class="panel">
+    <div class="room-header">
+      <div class="room-code-label">ROOM CODE</div>
+      <div class="room-code" id="roomCode">----</div>
+      <button class="btn btn-copy" id="btn-room-copy">COPY INVITE LINK</button>
+    </div>
+    <div class="room-players" id="roomPlayers"></div>
+    <div class="room-hint" id="roomHint">WAITING...</div>
+    <div class="panel-actions">
+      <button class="btn btn-primary" id="btn-room-start" disabled>WAITING...</button>
+      <button class="btn" id="btn-room-leave">LEAVE ROOM</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ GAME ============ -->
+<div class="screen game" id="screen-game">
+  <canvas id="game"></canvas>
+
+  <div class="hud">
+    <div class="hud-top-left">
+      <div class="hp-label">HEALTH</div>
+      <div class="hp-bar"><div class="hp-fill" id="hp"></div></div>
+      <div class="hp-text" id="hptext">100</div>
+    </div>
+
+    <div class="hud-top-center">
+      <div class="wave-label">WAVE</div>
+      <div class="wave-num" id="wave">1</div>
+      <div class="wave-sub" id="wavesub">INCOMING</div>
+    </div>
+
+    <div class="hud-top-right">
+      <div class="score-label">SCORE</div>
+      <div class="score-num" id="score">0</div>
+      <div class="kills-label">KILLS</div>
+      <div class="kills-num" id="kills">0</div>
+    </div>
+
+    <!-- Boss health bar -->
+    <div class="hud-boss" id="bossBar">
+      <div class="boss-name" id="bossName">THE BUTCHER</div>
+      <div class="boss-hp-bg">
+        <div class="boss-hp-fill" id="bossHp"></div>
+      </div>
+    </div>
+
+    <div class="hud-bottom-left">
+      <div class="player-name" id="hudname">ROOKIE</div>
+    </div>
+
+    <div class="hud-bottom-right">
+      <div class="weapon-name" id="weaponName">PISTOL</div>
+      <div class="ammo">
+        <span class="ammo-mag" id="ammoMag">12</span>
+        <span class="ammo-sep">/</span>
+        <span class="ammo-res" id="ammoRes">∞</span>
+      </div>
+      <div class="ammo-hint" id="ammoHint">R TO RELOAD</div>
+    </div>
+
+    <div class="hud-drop" id="dropHint"></div>
+
+    <div class="hud-feed" id="killfeed"></div>
+  </div>
+
+  <div class="banner" id="banner">
+    <div class="banner-title" id="bannerTitle">WAVE 1</div>
+    <div class="banner-sub" id="bannerSub">INCOMING</div>
+  </div>
+
+  <div class="pause-hint" id="pauseHint">PRESS ESC TO PAUSE</div>
+</div>
+
+<!-- ============ GAME OVER ============ -->
+<div class="screen gameover" id="screen-gameover">
+  <h1>YOU DIED</h1>
+  <div class="go-stats">
+    <div><span>SCORE</span><b id="goScore">0</b></div>
+    <div><span>WAVE</span><b id="goWave">1</b></div>
+    <div><span>KILLS</span><b id="goKills">0</b></div>
+  </div>
+  <div class="go-actions">
+    <button class="btn btn-primary" id="btn-retry">TRY AGAIN</button>
+    <button class="btn" id="btn-lobby">LOBBY</button>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
