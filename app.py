@@ -281,16 +281,20 @@ def game_loop(code):
 # MAIN
 # ============================================================
 if __name__ == '__main__':
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    
     print('=' * 50)
     print('  DEADLINE SERVER')
     print('=' * 50)
     print(f'  Client dir: {CLIENT_DIR}')
-    print(f'  Open: http://localhost:5000')
+    print(f'  Port: {port}')
     print('=' * 50)
+    
     socketio.run(
         app,
         host='0.0.0.0',
-        port=5000,
+        port=port,
         debug=False,
         allow_unsafe_werkzeug=True,
     )
