@@ -12,11 +12,10 @@ from game import GameState, TICK_DT
 # APP
 # ============================================================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-CLIENT_DIR = os.path.join(BASE_DIR, '..', 'client')
+CLIENT_DIR = os.path.abspath(os.path.join(BASE_DIR, 'client'))
 
 app = Flask(__name__, static_folder=CLIENT_DIR, static_url_path='')
 app.config['SECRET_KEY'] = 'deadline-secret-2024'
-
 # async_mode رو مشخص نمی‌کنیم — خودش threading رو انتخاب می‌کنه
 socketio = SocketIO(
     app,
